@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Payment Details</h1>
+    </header>
+    <div class="container">
+        <div id="donationSummary" style="margin-bottom: 20px;">
+            
+        </div>
+        <form id="paymentForm">
+            <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter your card number" required>
+            </div>
+            <div class="form-group">
+                <label for="expiryDate">Expiry Date</label>
+                <input type="month" id="expiryDate" name="expiryDate" required>
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="number" id="cvv" name="cvv" placeholder="Enter CVV" required>
+            </div>
+            <button type="submit">Submit Payment</button>
+        </form>
+    </div>
+    <script>
+        const donationData = JSON.parse(localStorage.getItem("donationData"));
+        const donationSummary = document.getElementById("donationSummary");
+
+        if (donationData) {
+            donationSummary.innerHTML = `
+                <h3>Donation Summary</h3>
+                <p><strong>Name:</strong> ${donationData.name}</p>
+                <p><strong>Email:</strong> ${donationData.email}</p>
+                <p><strong>Amount:</strong> ₹${donationData.amount}</p>
+                <p><strong>Cause:</strong> ${donationData.cause}</p>
+            `;
+        }
+        const paymentForm = document.getElementById("paymentForm");
+        paymentForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const cardNumber = document.getElementById("cardNumber").value;
+            const expiryDate = document.getElementById("expiryDate").value;
+            const cvv = document.getElementById("cvv").value;
+
+            alert("Payment submitted successfully!");
+            localStorage.clear(); 
+        });
+    </script>
+</body>
+</html>
